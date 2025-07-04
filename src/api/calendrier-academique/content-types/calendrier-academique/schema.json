@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "calendrier_academiques",
+  "info": {
+    "singularName": "calendrier-academique",
+    "pluralName": "calendrier-academiques",
+    "displayName": "Calendrier_academique"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cours_formation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cours-formation.cours-formation",
+      "inversedBy": "calendrier_academiques"
+    },
+    "date_debut": {
+      "type": "date",
+      "required": true,
+      "default": "2025-07-05"
+    },
+    "date_fin": {
+      "type": "date",
+      "required": true,
+      "default": "2025-10-03"
+    }
+  }
+}

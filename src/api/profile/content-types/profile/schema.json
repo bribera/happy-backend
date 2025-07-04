@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "profiles",
+  "info": {
+    "singularName": "profile",
+    "pluralName": "profiles",
+    "displayName": "Profile "
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "specialite": {
+      "type": "string"
+    },
+    "niveau": {
+      "type": "enumeration",
+      "enum": [
+        "Débutant",
+        "Intermédiaire ",
+        "Avancé"
+      ]
+    }
+  }
+}

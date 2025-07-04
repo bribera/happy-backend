@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payements",
+  "info": {
+    "singularName": "payement",
+    "pluralName": "payements",
+    "displayName": "Payement"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "inscription": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::inscription.inscription",
+      "inversedBy": "payements"
+    },
+    "moyen": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "MTN(MobileMoney)",
+        "Moov(MoovMoney)"
+      ]
+    },
+    "date_payement": {
+      "type": "date",
+      "required": true
+    },
+    "etat": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "En cours",
+        "Réussi",
+        "Echoué"
+      ]
+    },
+    "transaction_ID": {
+      "type": "string"
+    },
+    "paye_a": {
+      "type": "date"
+    },
+    "montant": {
+      "type": "decimal",
+      "required": true,
+      "default": 40000
+    }
+  }
+}

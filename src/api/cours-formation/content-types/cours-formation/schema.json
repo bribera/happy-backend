@@ -1,0 +1,99 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cours_formations",
+  "info": {
+    "singularName": "cours-formation",
+    "pluralName": "cours-formations",
+    "displayName": "Cours-Formation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "titre",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::categorie.categorie",
+      "inversedBy": "cours_formations"
+    },
+    "langue_cours": {
+      "type": "enumeration",
+      "default": "Anglais",
+      "enum": [
+        "Anglais",
+        "Espagnol ",
+        "Japonaise "
+      ]
+    },
+    "niveau": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Débutant",
+      "enum": [
+        "Débutant",
+        "Intermédiaire ",
+        "Avancé "
+      ]
+    },
+    "prix": {
+      "type": "decimal",
+      "required": true
+    },
+    "date_demarage": {
+      "type": "date",
+      "required": true,
+      "default": "2025-07-05"
+    },
+    "dure": {
+      "type": "string",
+      "default": "3 mois",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "date_fin": {
+      "type": "date"
+    },
+    "inscriptions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::inscription.inscription",
+      "mappedBy": "cours_formation"
+    },
+    "calendrier_academiques": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::calendrier-academique.calendrier-academique",
+      "mappedBy": "cours_formation"
+    },
+    "ressource_pedagogiques": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ressource-pedagogique.ressource-pedagogique",
+      "mappedBy": "cours_formation"
+    }
+  }
+}

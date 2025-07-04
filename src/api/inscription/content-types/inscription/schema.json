@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inscriptions",
+  "info": {
+    "singularName": "inscription",
+    "pluralName": "inscriptions",
+    "displayName": "Inscription"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "inscriptions"
+    },
+    "cours_formation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cours-formation.cours-formation",
+      "inversedBy": "inscriptions"
+    },
+    "etat": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "En cours ",
+        "Payé",
+        "Annulé"
+      ]
+    },
+    "date_payement": {
+      "type": "date",
+      "required": true
+    },
+    "payements": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payement.payement",
+      "mappedBy": "inscription"
+    }
+  }
+}
