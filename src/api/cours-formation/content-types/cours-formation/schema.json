@@ -94,6 +94,18 @@
       "relation": "oneToMany",
       "target": "api::ressource-pedagogique.ressource-pedagogique",
       "mappedBy": "cours_formation"
+    },
+    "levels": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::level.level",
+      "mappedBy": "cours_formation"
+    },
+    "formats": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::format.format",
+      "mappedBy": "cours_formation"
     }
   }
 }

@@ -11,18 +11,33 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "titre": {
-      "type": "string"
-    },
     "slug": {
       "type": "uid",
-      "targetField": "titre"
+      "targetField": "name"
     },
     "cours_formations": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::cours-formation.cours-formation",
       "mappedBy": "category"
+    },
+    "name": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "categorie": {
+      "type": "enumeration",
+      "enum": [
+        "📚 Tous_les_cours",
+        "🇬🇧 Anglais",
+        "🇯🇵 Japonais",
+        "🇪🇸 Espagnol",
+        "📊 Gestion_de_Projet",
+        "💻 Secrétariat_Informatique",
+        "📈 Comptabilité"
+      ]
     }
   }
 }

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "agrements",
+  "info": {
+    "singularName": "agrement",
+    "pluralName": "agrements",
+    "displayName": "Agrément "
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "type_certification": {
+      "type": "text"
+    }
+  }
+}

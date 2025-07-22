@@ -15,10 +15,6 @@
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "text",
-      "maxLength": 80
-    },
     "slug": {
       "type": "uid",
       "targetField": "title"
@@ -39,14 +35,34 @@
       "target": "api::author.author",
       "inversedBy": "articles"
     },
-    "blocks": {
-      "type": "dynamiczone",
-      "components": [
-        "shared.media",
-        "shared.quote",
-        "shared.rich-text",
-        "shared.slider"
+    "desc": {
+      "type": "blocks",
+      "required": true
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "views": {
+      "type": "integer"
+    },
+    "readTime": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "image",
+        "vidéo"
       ]
+    },
+    "format": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::format.format",
+      "inversedBy": "courses"
     }
   }
 }
