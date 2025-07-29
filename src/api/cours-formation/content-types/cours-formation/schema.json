@@ -66,7 +66,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
@@ -106,6 +106,18 @@
       "relation": "oneToMany",
       "target": "api::format.format",
       "mappedBy": "cours_formation"
+    },
+    "color": {
+      "type": "string"
+    },
+    "session": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
     }
   }
 }

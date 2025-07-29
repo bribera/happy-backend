@@ -643,6 +643,7 @@ export interface ApiCoursFormationCoursFormation
       'manyToOne',
       'api::categorie.categorie'
     >;
+    color: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -655,8 +656,8 @@ export interface ApiCoursFormationCoursFormation
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'3 mois'>;
     formats: Schema.Attribute.Relation<'oneToMany', 'api::format.format'>;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Schema.Attribute.Required;
+    icon: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     inscriptions: Schema.Attribute.Relation<
       'oneToMany',
       'api::inscription.inscription'
@@ -666,6 +667,7 @@ export interface ApiCoursFormationCoursFormation
     > &
       Schema.Attribute.DefaultTo<'Anglais'>;
     levels: Schema.Attribute.Relation<'oneToMany', 'api::level.level'>;
+    link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -683,6 +685,7 @@ export interface ApiCoursFormationCoursFormation
       'oneToMany',
       'api::ressource-pedagogique.ressource-pedagogique'
     >;
+    session: Schema.Attribute.String;
     slug: Schema.Attribute.UID<'titre'> & Schema.Attribute.Required;
     titre: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
