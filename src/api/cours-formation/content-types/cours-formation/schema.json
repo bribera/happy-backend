@@ -66,7 +66,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
@@ -93,6 +93,42 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::ressource-pedagogique.ressource-pedagogique",
+      "mappedBy": "cours_formation"
+    },
+    "levels": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::level.level",
+      "mappedBy": "cours_formation"
+    },
+    "formats": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::format.format",
+      "mappedBy": "cours_formation"
+    },
+    "color": {
+      "type": "string"
+    },
+    "session": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "sessions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::session.session",
+      "mappedBy": "cours_formation"
+    },
+    "liste_d_attentes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::liste-d-attente.liste-d-attente",
       "mappedBy": "cours_formation"
     }
   }

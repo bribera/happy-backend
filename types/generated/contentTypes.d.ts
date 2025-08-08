@@ -439,6 +439,36 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiAgrementAgrement extends Struct.CollectionTypeSchema {
+  collectionName: 'agrements';
+  info: {
+    displayName: 'Agr\u00E9ment ';
+    pluralName: 'agrements';
+    singularName: 'agrement';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::agrement.agrement'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    type_certification: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
@@ -452,17 +482,14 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
   attributes: {
     author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
+    content: Schema.Attribute.Blocks;
     cover: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
+    date: Schema.Attribute.Date;
+    desc: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    format: Schema.Attribute.Relation<'manyToOne', 'api::format.format'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -470,11 +497,14 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    readTime: Schema.Attribute.String;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['image', 'vid\u00E9o']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    views: Schema.Attribute.Integer;
   };
 }
 
@@ -559,6 +589,17 @@ export interface ApiCategorieCategorie extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    categorie: Schema.Attribute.Enumeration<
+      [
+        '\uD83D\uDCDA Tous_les_cours',
+        '\uD83C\uDDEC\uD83C\uDDE7 Anglais',
+        '\uD83C\uDDEF\uD83C\uDDF5 Japonais',
+        '\uD83C\uDDEA\uD83C\uDDF8 Espagnol',
+        '\uD83D\uDCCA Gestion_de_Projet',
+        '\uD83D\uDCBB Secr\u00E9tariat_Informatique',
+        '\uD83D\uDCC8 Comptabilit\u00E9',
+      ]
+    >;
     cours_formations: Schema.Attribute.Relation<
       'oneToMany',
       'api::cours-formation.cours-formation'
@@ -566,15 +607,16 @@ export interface ApiCategorieCategorie extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    icon: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::categorie.categorie'
     > &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'titre'>;
-    titre: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -601,6 +643,7 @@ export interface ApiCoursFormationCoursFormation
       'manyToOne',
       'api::categorie.categorie'
     >;
+    color: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -612,8 +655,9 @@ export interface ApiCoursFormationCoursFormation
     dure: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'3 mois'>;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Schema.Attribute.Required;
+    formats: Schema.Attribute.Relation<'oneToMany', 'api::format.format'>;
+    icon: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     inscriptions: Schema.Attribute.Relation<
       'oneToMany',
       'api::inscription.inscription'
@@ -622,6 +666,12 @@ export interface ApiCoursFormationCoursFormation
       ['Anglais', 'Espagnol ', 'Japonaise ']
     > &
       Schema.Attribute.DefaultTo<'Anglais'>;
+    levels: Schema.Attribute.Relation<'oneToMany', 'api::level.level'>;
+    link: Schema.Attribute.String;
+    liste_d_attentes: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::liste-d-attente.liste-d-attente'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -639,8 +689,108 @@ export interface ApiCoursFormationCoursFormation
       'oneToMany',
       'api::ressource-pedagogique.ressource-pedagogique'
     >;
+    session: Schema.Attribute.String;
+    sessions: Schema.Attribute.Relation<'oneToMany', 'api::session.session'>;
     slug: Schema.Attribute.UID<'titre'> & Schema.Attribute.Required;
     titre: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDemarrageDateDemarrageDate
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'demarrage_dates';
+  info: {
+    displayName: 'Demarrage_date';
+    pluralName: 'demarrage-dates';
+    singularName: 'demarrage-date';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    demarrage: Schema.Attribute.Date &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'2025-07-25'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::demarrage-date.demarrage-date'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEnseignantEnseignant extends Struct.CollectionTypeSchema {
+  collectionName: 'enseignants';
+  info: {
+    displayName: 'Enseignant';
+    pluralName: 'enseignants';
+    singularName: 'enseignant';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    domaine: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::enseignant.enseignant'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    year_experience: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiFormatFormat extends Struct.CollectionTypeSchema {
+  collectionName: 'formats';
+  info: {
+    displayName: 'Format';
+    pluralName: 'formats';
+    singularName: 'format';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cours_formation: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cours-formation.cours-formation'
+    >;
+    courses: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    formatType: Schema.Attribute.UID<'name'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::format.format'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -717,6 +867,147 @@ export interface ApiInscriptionInscription extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+  };
+}
+
+export interface ApiLevelLevel extends Struct.CollectionTypeSchema {
+  collectionName: 'levels';
+  info: {
+    displayName: 'Level';
+    pluralName: 'levels';
+    singularName: 'level';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cours_formation: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cours-formation.cours-formation'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::level.level'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    niveau: Schema.Attribute.UID<'name'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLiensReseauLiensReseau extends Struct.CollectionTypeSchema {
+  collectionName: 'liens_reseaus';
+  info: {
+    displayName: 'Liens R\u00E9seau';
+    pluralName: 'liens-reseaus';
+    singularName: 'liens-reseau';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    facebook: Schema.Attribute.String;
+    Instagram: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::liens-reseau.liens-reseau'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    tiktok: Schema.Attribute.String;
+    twitter: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiListeDAttenteListeDAttente
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'liste_d_attentes';
+  info: {
+    displayName: "Liste d'attente";
+    pluralName: 'liste-d-attentes';
+    singularName: 'liste-d-attente';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cours_formation: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cours-formation.cours-formation'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    id_transaction: Schema.Attribute.String;
+    informations_client: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::liste-d-attente.liste-d-attente'
+    > &
+      Schema.Attribute.Private;
+    Montant_paye: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    statut_notification: Schema.Attribute.Enumeration<
+      ['Non notifi\u00E9', 'Notifi\u00E9']
+    > &
+      Schema.Attribute.DefaultTo<'Non notifi\u00E9'>;
+    statut_paiement: Schema.Attribute.Enumeration<
+      ['Pay\u00E9', 'En attente', '\u00C9chou\u00E9 ']
+    > &
+      Schema.Attribute.DefaultTo<'En attente'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
+  collectionName: 'locations';
+  info: {
+    displayName: 'Location';
+    pluralName: 'locations';
+    singularName: 'location';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    address: Schema.Attribute.String;
+    category: Schema.Attribute.Enumeration<['legend']>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    latitude: Schema.Attribute.Decimal;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::location.location'
+    > &
+      Schema.Attribute.Private;
+    longitude: Schema.Attribute.Decimal;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -800,6 +1091,36 @@ export interface ApiProfileProfile extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiQuestionFrequenteQuestionFrequente
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'question_frequentes';
+  info: {
+    displayName: 'Question_Frequente';
+    pluralName: 'question-frequentes';
+    singularName: 'question-frequente';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::question-frequente.question-frequente'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    question: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    reponse: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiRessourcePedagogiqueRessourcePedagogique
   extends Struct.CollectionTypeSchema {
   collectionName: 'ressource_pedagogiques';
@@ -839,6 +1160,43 @@ export interface ApiRessourcePedagogiqueRessourcePedagogique
   };
 }
 
+export interface ApiSessionSession extends Struct.CollectionTypeSchema {
+  collectionName: 'sessions';
+  info: {
+    displayName: 'Session';
+    pluralName: 'sessions';
+    singularName: 'session';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cours_formation: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cours-formation.cours-formation'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    etat: Schema.Attribute.Enumeration<
+      ['Disponible', 'Complet', 'Annul\u00E9']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Disponible'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::session.session'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    startDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiStatistiqueStatistique extends Struct.CollectionTypeSchema {
   collectionName: 'statistiques';
   info: {
@@ -869,6 +1227,37 @@ export interface ApiStatistiqueStatistique extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+  };
+}
+
+export interface ApiTemoignageTemoignage extends Struct.CollectionTypeSchema {
+  collectionName: 'temoignages';
+  info: {
+    displayName: 'Temoignage';
+    pluralName: 'temoignages';
+    singularName: 'temoignage';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::temoignage.temoignage'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.String;
+    text: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1390,17 +1779,28 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::agrement.agrement': ApiAgrementAgrement;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::calendrier-academique.calendrier-academique': ApiCalendrierAcademiqueCalendrierAcademique;
       'api::categorie.categorie': ApiCategorieCategorie;
       'api::cours-formation.cours-formation': ApiCoursFormationCoursFormation;
+      'api::demarrage-date.demarrage-date': ApiDemarrageDateDemarrageDate;
+      'api::enseignant.enseignant': ApiEnseignantEnseignant;
+      'api::format.format': ApiFormatFormat;
       'api::global.global': ApiGlobalGlobal;
       'api::inscription.inscription': ApiInscriptionInscription;
+      'api::level.level': ApiLevelLevel;
+      'api::liens-reseau.liens-reseau': ApiLiensReseauLiensReseau;
+      'api::liste-d-attente.liste-d-attente': ApiListeDAttenteListeDAttente;
+      'api::location.location': ApiLocationLocation;
       'api::payement.payement': ApiPayementPayement;
       'api::profile.profile': ApiProfileProfile;
+      'api::question-frequente.question-frequente': ApiQuestionFrequenteQuestionFrequente;
       'api::ressource-pedagogique.ressource-pedagogique': ApiRessourcePedagogiqueRessourcePedagogique;
+      'api::session.session': ApiSessionSession;
       'api::statistique.statistique': ApiStatistiqueStatistique;
+      'api::temoignage.temoignage': ApiTemoignageTemoignage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

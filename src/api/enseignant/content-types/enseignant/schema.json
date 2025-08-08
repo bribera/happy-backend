@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "enseignants",
+  "info": {
+    "singularName": "enseignant",
+    "pluralName": "enseignants",
+    "displayName": "Enseignant"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "role": {
+      "type": "text"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "year_experience": {
+      "type": "integer"
+    },
+    "domaine": {
+      "type": "text"
+    }
+  }
+}

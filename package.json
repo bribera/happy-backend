@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
+  "license": "MIT",
+  "author": {
+    "name": "Centre de Culture Japonaise"
+  },
   "scripts": {
     "build": "strapi build",
     "console": "strapi console",
@@ -19,15 +23,17 @@
     "@strapi/plugin-cloud": "5.16.1",
     "@strapi/plugin-users-permissions": "5.16.1",
     "@strapi/strapi": "5.16.1",
+    "export-import-strapi5-plugin": "^1.0.1",
     "fs-extra": "^10.0.0",
     "mime-types": "^2.1.27",
     "pg": "8.8.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
+    "strapi-csv-import-export": "^0.0.6",
+    "strapi-plugin-tablify": "^1.0.3",
     "styled-components": "^6.0.0"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"

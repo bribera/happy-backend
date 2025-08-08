@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "demarrage_dates",
+  "info": {
+    "singularName": "demarrage-date",
+    "pluralName": "demarrage-dates",
+    "displayName": "Demarrage_date"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "demarrage": {
+      "type": "date",
+      "required": true,
+      "default": "2025-07-25"
+    }
+  }
+}

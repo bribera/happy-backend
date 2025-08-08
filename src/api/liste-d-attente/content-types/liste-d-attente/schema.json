@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "liste_d_attentes",
+  "info": {
+    "singularName": "liste-d-attente",
+    "pluralName": "liste-d-attentes",
+    "displayName": "Liste d'attente"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "informations_client": {
+      "type": "richtext"
+    },
+    "statut_paiement": {
+      "type": "enumeration",
+      "default": "En attente",
+      "enum": [
+        "Payé",
+        "En attente",
+        "Échoué "
+      ]
+    },
+    "Montant_paye": {
+      "type": "decimal"
+    },
+    "id_transaction": {
+      "type": "string"
+    },
+    "cours_formation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cours-formation.cours-formation",
+      "inversedBy": "liste_d_attentes"
+    },
+    "statut_notification": {
+      "type": "enumeration",
+      "default": "Non notifié",
+      "enum": [
+        "Non notifié",
+        "Notifié"
+      ]
+    }
+  }
+}
