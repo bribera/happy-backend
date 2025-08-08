@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sessions",
+  "info": {
+    "singularName": "session",
+    "pluralName": "sessions",
+    "displayName": "Session"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "etat": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Disponible",
+      "enum": [
+        "Disponible",
+        "Complet",
+        "Annulé"
+      ]
+    },
+    "cours_formation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cours-formation.cours-formation",
+      "inversedBy": "sessions"
+    }
+  }
+}

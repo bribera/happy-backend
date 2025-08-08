@@ -118,6 +118,18 @@
     },
     "icon": {
       "type": "string"
+    },
+    "sessions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::session.session",
+      "mappedBy": "cours_formation"
+    },
+    "liste_d_attentes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::liste-d-attente.liste-d-attente",
+      "mappedBy": "cours_formation"
     }
   }
 }

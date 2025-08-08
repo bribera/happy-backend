@@ -7,4 +7,7 @@ module.exports = ({env}) => ({
 //       defaultLocale: 'fr',
 //     },
 //   },
+    'export-import-strapi5-plugin': {
+        enabled: true,
+    },
 });
