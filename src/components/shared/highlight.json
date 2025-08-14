@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_highlights",
+  "info": {
+    "displayName": "highlight"
+  },
+  "options": {},
+  "attributes": {
+    "hightlight": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
