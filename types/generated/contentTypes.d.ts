@@ -647,6 +647,7 @@ export interface ApiCoursFormationCoursFormation
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    currentPrice: Schema.Attribute.String;
     date_demarage: Schema.Attribute.Date &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'2025-07-05'>;
@@ -655,13 +656,16 @@ export interface ApiCoursFormationCoursFormation
     dure: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'3 mois'>;
+    email: Schema.Attribute.Email;
     formats: Schema.Attribute.Relation<'oneToMany', 'api::format.format'>;
+    highlight: Schema.Attribute.Component<'shared.highlight', true>;
     icon: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     inscriptions: Schema.Attribute.Relation<
       'oneToMany',
       'api::inscription.inscription'
     >;
+    instructor: Schema.Attribute.Component<'shared.information', false>;
     langue_cours: Schema.Attribute.Enumeration<
       ['Anglais', 'Espagnol ', 'Japonaise ']
     > &
@@ -678,20 +682,26 @@ export interface ApiCoursFormationCoursFormation
       'api::cours-formation.cours-formation'
     > &
       Schema.Attribute.Private;
+    location: Schema.Attribute.String;
     niveau: Schema.Attribute.Enumeration<
       ['D\u00E9butant', 'Interm\u00E9diaire ', 'Avanc\u00E9 ']
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'D\u00E9butant'>;
+    originalPrice: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
     prix: Schema.Attribute.Decimal & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     ressource_pedagogiques: Schema.Attribute.Relation<
       'oneToMany',
       'api::ressource-pedagogique.ressource-pedagogique'
     >;
+    schedule: Schema.Attribute.String;
     session: Schema.Attribute.String;
     sessions: Schema.Attribute.Relation<'oneToMany', 'api::session.session'>;
     slug: Schema.Attribute.UID<'titre'> & Schema.Attribute.Required;
+    subtitle: Schema.Attribute.RichText;
+    targetAudience: Schema.Attribute.Blocks;
     titre: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

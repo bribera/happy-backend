@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_information",
+  "info": {
+    "displayName": "information"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}

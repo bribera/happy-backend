@@ -130,6 +130,40 @@
       "relation": "oneToMany",
       "target": "api::liste-d-attente.liste-d-attente",
       "mappedBy": "cours_formation"
+    },
+    "subtitle": {
+      "type": "richtext"
+    },
+    "targetAudience": {
+      "type": "blocks"
+    },
+    "originalPrice": {
+      "type": "string"
+    },
+    "currentPrice": {
+      "type": "string"
+    },
+    "schedule": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "highlight": {
+      "type": "component",
+      "component": "shared.highlight",
+      "repeatable": true
+    },
+    "instructor": {
+      "type": "component",
+      "component": "shared.information",
+      "repeatable": false
     }
   }
 }
