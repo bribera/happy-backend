@@ -42,10 +42,8 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       origin: [
-        'https://happy-science-vitrine.vercel.app',
-        'https://happy-science-vitrine-git-main-votre-username.vercel.app',
-        'https://happy-science-vitrine-*.vercel.app',
-        'https://www.happyscience-vitrine.com', // Votre domaine si vous en avez un
+        'https://happy-frontend-3oyr.vercel.app',
+        'https://happy-frontend-3oyr-*.vercel.app', // Autorise tous les déploiements preview
       ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
