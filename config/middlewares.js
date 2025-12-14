@@ -30,14 +30,15 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
+      enable: true,
+      headers:'*',
       origin: [
         'http://localhost:3000',
         'https://happy-frontend-3oyr.vercel.app',
-        // 'https://happy-frontend-3oyr-*.vercel.app', // Autorise tous les déploiements preview
+        'https://happy-frontend-3oyr-j6w1vz1hd-briberas-projects.vercel.app',
       ],
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept','X-Frame-Options', 'X-Forwarded-For', 'Access-Control-Allow-Credentials', 'Access-Control-Allow-Origin',],
       keepHeaderOnError: true,
     },
   },
