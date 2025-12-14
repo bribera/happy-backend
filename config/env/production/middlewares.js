@@ -1,4 +1,4 @@
-// config/middlewares.js
+// config/env/production/middlewares.js
 module.exports = [
   'strapi::errors',
   {
@@ -30,9 +30,9 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      enable: true,
+      enabled: true, // <-- CORRECTION ICI
       headers:'*',
-      origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['*'],
+      origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',' ) : ['*'],
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       keepHeaderOnError: true,
