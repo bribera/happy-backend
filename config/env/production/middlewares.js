@@ -27,17 +27,38 @@ module.exports = [
       },
     },
   },
-  // {
-  //   name: 'strapi::cors',
-  //   config: {
-  //     enabled: true, // <-- CORRECTION ICI
-  //     headers:'*',
-  //     origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',' ) : ['*'],
-  //     credentials: true,
-  //     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-  //     keepHeaderOnError: true,
-  //   },
-  // },
+  {
+    name: 'strapi::cors',
+    config: {
+      enabled: true,
+      headers:'*',
+      // origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',' ) : ['*'],
+      // origin: ['*'], // ⚠️ À utiliser uniquement en développement
+    // OU pour production, utilisez un pattern :
+      origin: (ctx) => {
+        const allowedOrigins = [
+          'http://localhost:3000',
+          'https://happy-frontend-3oyr-cc89arqgq-briberas-projects.vercel.app'
+        ];
+        
+        const origin = ctx.request.header.origin;
+        
+        // Autoriser tous les domaines Vercel de votre projet
+        if (origin && origin.includes('vercel.app')) {
+          return origin;
+        }
+        
+        if (allowedOrigins.includes(origin)) {
+          return origin;
+        }
+        
+        return allowedOrigins[0];
+      },
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      keepHeaderOnError: true,
+    },
+  },
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
