@@ -27,17 +27,17 @@ module.exports = [
       },
     },
   },
-  {
-    name: 'strapi::cors',
-    config: {
-      enabled: true, // <-- CORRECTION ICI
-      headers:'*',
-      origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',' ) : ['*'],
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-      keepHeaderOnError: true,
-    },
-  },
+  // {
+  //   name: 'strapi::cors',
+  //   config: {
+  //     enabled: true, // <-- CORRECTION ICI
+  //     headers:'*',
+  //     origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',' ) : ['*'],
+  //     credentials: true,
+  //     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+  //     keepHeaderOnError: true,
+  //   },
+  // },
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
