@@ -38,16 +38,15 @@ module.exports = [
       //   'https://happy-frontend-3oyr.vercel.app',
       //   'http://localhost:3000',
       // ],
-      origin: (ctx) => {
+      origin: (ctx ) => {
         const allowedOrigins = [
-          'http://localhost:3000',
-          'https://happy-frontend-3oyr-cc89arqgq-briberas-projects.vercel.app'
+          'https://ccj-frontend-3oyr.vercel.app', 'http://localhost:3000'
         ];
-      
+
         const origin = ctx.request.header.origin;
         
         // Autoriser tous les domaines Vercel de votre projet
-        if (origin && origin.includes('vercel.app')) {
+        if (origin && origin.includes('vercel.app' )) {
           return origin;
         }
         
@@ -57,6 +56,7 @@ module.exports = [
         
         return allowedOrigins[0];
       },
+
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       keepHeaderOnError: true,
