@@ -6,9 +6,9 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      header: '*',
+      // header: '*',
       // Utilisez explicitement votre domaine pour contourner tout problème avec '*'
-      origin: ['https://ccj-frontend-3oyr.vercel.app'], 
+      origin: ['https://ccj-frontend-3oyr.vercel.app', 'https://ccjbenin229.vercel.app', 'https://ccjbenin.vercel.app'], 
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       credentials: true, // Important si vous utilisez des cookies ou des en-têtes d'autorisation
       keepHeaderOnError: true,
