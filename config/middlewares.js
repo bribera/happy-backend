@@ -32,7 +32,7 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      headers:'*',
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       // origin: [
       //   'https://happy-frontend-3oyr-cc89arqgq-briberas-projects.vercel.app',
       //   'https://happy-frontend-3oyr.vercel.app',
@@ -40,7 +40,10 @@ module.exports = [
       // ],
       origin: (ctx ) => {
         const allowedOrigins = [
-          'https://ccj-frontend-3oyr.vercel.app', 'http://localhost:3000'
+          'https://ccj-frontend-3oyr.vercel.app',
+          'https://ccjbenin229.vercel.app', // Add your specific domain
+          'http://localhost:3000',
+          'https://ccjbenin.vercel.app',
         ];
 
         const origin = ctx.request.header.origin;
