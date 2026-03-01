@@ -11,7 +11,8 @@ module.exports = [
       origin: ['https://ccj-frontend-3oyr.vercel.app', 
         'https://ccjbenin.vercel.app', 
         'https://ccjbenin229.vercel.app',
-        'http://localhost:3000',], 
+        // 'http://localhost:3000', 
+        'http://localhost:3001',], 
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       credentials: true, // Important si vous utilisez des cookies ou des en-têtes d'autorisation
       keepHeaderOnError: true,
