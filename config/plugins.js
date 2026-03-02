@@ -1,3 +1,5 @@
+const { UploadStream } = require("cloudinary");
+
 module.exports = ({env}) => ({
 
 //     i18n: {
@@ -30,6 +32,7 @@ module.exports = ({env}) => ({
             },
             actionOptions: {
                 upload: {},
+                uploadStream: {},
                 delete: {},
             },
         },
