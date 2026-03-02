@@ -1,7 +1,32 @@
 // config/env/production/middlewares.js
 module.exports = [
   'strapi::errors',
-  'strapi::security',
+  {
+  name: 'strapi::security',
+  config: {
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'connect-src': ["'self'", 'https:'],
+        'img-src': [
+          "'self'",
+          'data:',
+          'blob:',
+          'market-assets.strapi.io',
+          'res.cloudinary.com',      // ← autorise l'affichage des images
+        ],
+        'media-src': [
+          "'self'",
+          'data:',
+          'blob:',
+          'market-assets.strapi.io',
+          'res.cloudinary.com',
+        ],
+        upgradeInsecureRequests: null,
+      },
+    },
+  },
+},
   {
     name: 'strapi::cors',
     config: {
